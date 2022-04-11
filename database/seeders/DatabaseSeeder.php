@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,5 +30,17 @@ class DatabaseSeeder extends Seeder
         $moveis->name = "Móveis";
         $moveis->fee = 1;
         $moveis->save();
+
+        $produto1 = new Product();
+        $produto1->name = "Produto 1";
+        $produto1->description = "Eu sou um produto!";
+        $produto1->category_id = 1;
+        $produto1->save();
+
+        $produto2 = new Product();
+        $produto2->name = "Produto 2";
+        $produto2->description = "Eu sou outro produto!";
+        $produto2->category_id = 2;
+        $produto2->save();
     }
 }
