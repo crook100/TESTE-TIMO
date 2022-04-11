@@ -31,7 +31,7 @@
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fas fa-fw fa-box"></i> Produtos <button class="btn btn-success"><i class="fas fa-fw fa-plus"></i> Criar produto</button>
+                        <i class="fas fa-fw fa-box"></i> Produtos <button onclick="Start_Product_Create();" class="btn btn-success"><i class="fas fa-fw fa-plus"></i> Criar produto</button>
                     </div>
                     <div id="products_list" class="card-body">
                         <p class="text-center">
@@ -53,6 +53,40 @@
                 </div>
             </div>
         </div>
+        <div id="product_create_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Criar produto</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="product_create_form">
+                            <label class="w-100">
+                                Nome
+                                <input name="name" type="text" maxlength="64" class="form-control">
+                            </label>
+                            <label class="w-100">
+                                Descrição
+                                <input name="description" type="text" maxlength="128" class="form-control">
+                            </label>
+                            <label class="w-100">
+                                Categoria
+                                <select id="product_create_category_list" name="category_id" class="form-control">
+                                    <option value="-1" disabled selected>Carregando...</option>
+                                </select>
+                            </label>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="product_create_button" onclick="Product_Create();" type="button" class="btn btn-success">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="product_delete_modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
@@ -67,6 +101,34 @@
                     </div>
                     <div class="modal-footer">
                         <button id="product_delete_button" onclick="Product_Delete();" type="button" class="btn btn-danger">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="category_create_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Criar categria</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="category_create_form">
+                            <label class="w-100">
+                                Nome
+                                <input name="name" type="text" maxlength="64" class="form-control">
+                            </label>
+                            <label class="w-100">
+                                Taxa de juros
+                                <input name="fee" type="number" step="0.01" maxlength="128" class="form-control">
+                            </label>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="category_create_button" onclick="Category_Create();" type="button" class="btn btn-success">Confirmar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
                     </div>
                 </div>

@@ -3,6 +3,53 @@ var product_modify_id = null;
 var category_modify_id = null;
 
 //Edit product
+function Start_Product_Create()
+{
+    $("#product_create_modal").modal("show");
+
+    $.ajax({
+        url: "/categories",
+        async: true
+    }).done(function(data) {
+        $("#product_create_category_list").html("");
+
+        //Apply newly loaded products to page.
+        for(let i = 0; i < data.length; i++)
+        {
+            $("#product_create_category_list").append(`
+            <option value="${data[i].id}">
+                ${data[i].name}
+            </option>`);
+        }
+    }).fail(function(){
+        alert("Houve um erro carregando as categorias.");
+        $("#product_create_modal").modal("hide");
+    });
+
+}
+
+function Product_Create()
+{
+    $("#product_create_button").html("<i class='fas fa-spin fa-spinner'></i> Criando...").toggleClass("disabled", true);
+
+    let formData = $('#product_create_form').serialize()
+
+    $.ajax({
+        url: `/products`,
+        data: formData,
+        processData: false,
+        method: "POST",
+    }).done(function() {
+        $("#products_list").html("<p class='text-center'><i class='fas fa-fw fa-spin fa-spinner'></i> Produto criado, atualizando...</p>")
+        Load_Products();
+    }).fail(function(){
+        alert("Houve um erro criando o produto.");
+    }).always(function(){
+        $("#product_create_modal").modal("hide");
+        $("#product_create_button").html("Confirmar").toggleClass("disabled", false);
+    });
+}
+
 function Start_Product_Edit(id)
 {
     product_modify_id = id;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,15 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $product = new Product();
+        $product->fill($request->only(["name", "description", "category_id"]));
+        if($product->save())
+        {
+            return response()->json("Success");
+        }
+        return response()->json("Fail", 400);
     }
 
     /**
