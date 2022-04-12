@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,15 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $category = new Category();
+        $category->fill($request->only(["name", "fee"]));
+        if($category->save())
+        {
+            return response()->json("Success");
+        }
+        return response()->json("Fail", 400);
     }
 
     /**
@@ -69,9 +76,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->fill($request->only(["name", "fee"]));
+        if($category->save())
+        {
+            return response()->json("Success");
+        }
+        return response()->json("Fail", 400);
     }
 
     /**

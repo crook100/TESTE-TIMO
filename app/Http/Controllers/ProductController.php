@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $produtos = Product::all();
+        $produtos = Product::with("category")->get();
         return response()->json($produtos);
     }
 
@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $product = new Product();
-        $product->fill($request->only(["name", "description", "category_id"]));
+        $product->fill($request->only(["name", "price", "description", "category_id"]));
         if($product->save())
         {
             return response()->json("Success");
@@ -76,9 +76,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->fill($request->only(["name", "price", "description", "category_id"]));
+        if($product->save())
+        {
+            return response()->json("Success");
+        }
+        return response()->json("Fail", 400);
     }
 
     /**

@@ -43,7 +43,7 @@
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fas fa-fw fa-align-justify"></i> Categorias <button class="btn btn-success"><i class="fas fa-fw fa-plus"></i> Criar categoria</button>
+                        <i class="fas fa-fw fa-align-justify"></i> Categorias <button onclick="Start_Category_Create();" class="btn btn-success"><i class="fas fa-fw fa-plus"></i> Criar categoria</button>
                     </div>
                     <div id="categories_list" class="card-body">
                         <p class="text-center">
@@ -53,6 +53,28 @@
                 </div>
             </div>
         </div>
+
+        <!-- Installments modal -->
+        <div id="installments_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Parcelas do produto</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="installments_price_per_installment"><i class="fas fa-fw fa-spin fa-spinner"></i> Carregando parcelamento...</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products CRUD modals -->
         <div id="product_create_modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -67,6 +89,10 @@
                             <label class="w-100">
                                 Nome
                                 <input name="name" type="text" maxlength="64" class="form-control">
+                            </label>
+                            <label class="w-100">
+                                Preço
+                                <input name="price" type="number" step="0.01" class="form-control">
                             </label>
                             <label class="w-100">
                                 Descrição
@@ -87,6 +113,46 @@
                 </div>
             </div>
         </div>
+
+        <div id="product_edit_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar produto</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="product_edit_form">
+                            <label class="w-100">
+                                Nome
+                                <input id="product_edit_name" name="name" type="text" maxlength="64" class="form-control">
+                            </label>
+                            <label class="w-100">
+                                Preço
+                                <input id="product_edit_price" name="price" type="number" step="0.01" class="form-control">
+                            </label>
+                            <label class="w-100">
+                                Descrição
+                                <input id="product_edit_description" name="description" type="text" maxlength="128" class="form-control">
+                            </label>
+                            <label class="w-100">
+                                Categoria
+                                <select id="product_edit_category_list" name="category_id" class="form-control">
+                                    <option value="-1" disabled selected>Carregando...</option>
+                                </select>
+                            </label>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="product_edit_button" onclick="Product_Edit();" type="button" class="btn btn-success">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="product_delete_modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
@@ -106,6 +172,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Categories CRUD modals -->
         <div id="category_create_modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -134,6 +202,36 @@
                 </div>
             </div>
         </div>
+
+        <div id="category_edit_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar categria</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="category_edit_form">
+                            <label class="w-100">
+                                Nome
+                                <input id="category_edit_name" name="name" type="text" maxlength="64" class="form-control">
+                            </label>
+                            <label class="w-100">
+                                Taxa de juros
+                                <input id="category_edit_fee" name="fee" type="number" step="0.01" maxlength="128" class="form-control">
+                            </label>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="category_edit_button" onclick="Category_Edit();" type="button" class="btn btn-success">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="category_delete_modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">

@@ -33,12 +33,14 @@ class DatabaseSeeder extends Seeder
 
         $produto1 = new Product();
         $produto1->name = "Produto 1";
+        $produto1->price = 100;
         $produto1->description = "Eu sou um produto!";
         $produto1->category_id = 1;
         $produto1->save();
 
         $produto2 = new Product();
         $produto2->name = "Produto 2";
+        $produto2->price = 50;
         $produto2->description = "Eu sou outro produto!";
         $produto2->category_id = 2;
         $produto2->save();

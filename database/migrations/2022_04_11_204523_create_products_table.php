@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("name", 64);
             $table->string("description", 128)->nullable();
+            $table->decimal("price");
             $table->unsignedBigInteger("category_id")->nullable();
             $table->timestamps();
 
