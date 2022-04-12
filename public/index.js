@@ -1,6 +1,8 @@
 
 var product_modify_id = null;
 var category_modify_id = null;
+var last_installment_price = null;
+var last_installment_fee = null;
 
 /* #region  Products */
 function Start_Product_Create() {
@@ -144,15 +146,29 @@ function Product_Delete() {
 function Start_Product_Installments(id)
 {
     $("#installments_modal").modal("show");
+    $("#installments_fee_per_installment").html(`<i class="fas fa-fw fa-spin fa-spinner"></i> Carregando parcelamento...`)
+    $("#installments_price_per_installment").html(`<i class="fas fa-fw fa-spin fa-spinner"></i> Carregando parcelamento...`)
+    $("#installments_quantity").val("1");
 
     $.ajax({
         url: `/installments/${id}`,
     }).done(function (data) {
-        $("#installments_price_per_installment").html(`<p>Juros por parcela: ${data.price_per_installment}</p>`)
+        last_installment_price = data.price;
+        last_installment_fee = data.price_per_installment;
+        $("#installments_fee_per_installment").html(`<p>Juros por parcela: ${data.price_per_installment}</p>`)
+        let price_installment = parseFloat(last_installment_price) + parseFloat(last_installment_fee);
+        $("#installments_price_per_installment").html(`<p>Preço por parcela: ${price_installment}</p>`)
     }).fail(function () {
         alert("Houve um erro parcelando o produto.");
         $("#installments_modal").modal("hide");
     });
+}
+
+function ReloadInstallments()
+{
+    let quantity = $("#installments_quantity").val();
+    let price_installment = (parseFloat(last_installment_price)/parseFloat(quantity)) + parseFloat(last_installment_fee);
+    $("#installments_price_per_installment").html(`<p>Preço por parcela: ${price_installment}</p>`)
 }
 /* #endregion */
 

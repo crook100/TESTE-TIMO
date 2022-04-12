@@ -65,7 +65,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p id="installments_price_per_installment"><i class="fas fa-fw fa-spin fa-spinner"></i> Carregando parcelamento...</p>
+                        <p id="installments_fee_per_installment"><i class="fas fa-fw fa-spin fa-spinner"></i> Carregando parcelamento...</p>
+                        <label class="w-100">
+                            Selecione a quantidade de parcelas:
+                            <input min="1" max="99" oninput="ReloadInstallments();" type="number" step="1" id="installments_quantity" value="1" class="form-control" />
+                        </label>
+                        <p id="installments_price_per_installment">Preço por parcela: </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>

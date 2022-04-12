@@ -20,6 +20,9 @@ class InstallmentController extends Controller
 
         $price_per_installment = $price * $category_fee;
 
-        return response()->json(["price_per_installment" => $price_per_installment]);
+        return response()->json([
+            "price" => $price,
+            "price_per_installment" => $price_per_installment
+        ]);
     }
 }
